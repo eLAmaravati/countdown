@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Countdown</title>
+
+		<style>
+			#countdown {
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			.countdown__box {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				text-align: center;
+				margin: auto;
+				border: 2px solid #111;
+				padding: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Menambahkan elemen HTML untuk menampilkan waktu yang tersisa -->
+		<div id="countdown">
+			<div class="countdown__box">
+				<span class="countdown__day--number"></span>
+				<span class="countdown__day--text">Days</span>
+			</div>
+			<div class="countdown__box">
+				<span class="countdown__hour--number"></span>
+				<span class="countdown__hour--text">Hours</span>
+			</div>
+			<div class="countdown__box">
+				<span class="countdown__minute--number"></span>
+				<span class="countdown__minute--text">Minutes</span>
+			</div>
+			<div class="countdown__box">
+				<span class="countdown__second--number"></span>
+				<span class="countdown__second--text">Seconds</span>
+			</div>
+		</div>
+
+		<script>
+			// Set the date we're counting down to
+			const countDownDate = new Date("Jan 7, 2023 15:37:25").getTime();
+
+			// Update the count down every 1 second
+			const x = setInterval(function () {
+
+				// Get today's date and time
+				const now = new Date().getTime();
+
+				// Find the distance between now and the count down date
+				const distance = countDownDate - now;
+
+				// Time calculations for days, hours, minutes and seconds
+				const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				// Output the result in an element with id="demo"
+				document.querySelector(".countdown__day--number").innerHTML = days;
+				document.querySelector(".countdown__hour--number").innerHTML = hours;
+				document.querySelector(".countdown__minute--number").innerHTML = minutes;
+				document.querySelector(".countdown__second--number").innerHTML = seconds;
+
+				// If the count down is over, write some text
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("countdown").innerHTML = "It's the Day!";
+				}
+			}, 1000);
+		</script>
+
+	</body>
+
+</html>
